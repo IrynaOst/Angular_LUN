@@ -17,7 +17,7 @@
 <br>
 
 <div *ngIf="statusReg" >
-  <form action="/users" method="post">
+  <form>
     <h4>Registration</h4>
       <input type="text" name="name" placeholder="name">
       <br>
@@ -33,7 +33,7 @@
 <br>
 
 <div *ngIf="statusLog">
-  <form action="/auth/users" method="post">
+  <form>
     <h4>Authorization</h4>
       <input type="text" name="email" placeholder="email">
       <br>
