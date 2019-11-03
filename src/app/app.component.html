@@ -115,19 +115,19 @@
   <div>Price: {{house.price}}</div>
   <br>
   <div *ngIf="showFullIndex === house.id && showMore">
-      <div>Street: {{house.street}}</div>
+    <div>Street: {{house.street}}</div>
+    <br>
+    <div>Square meters: {{house.square}}</div>
+    <br>
+    <div>Rooms count: {{house.rooms}}</div>
+    <br>
+    <div>
+      Owner: {{house.user.name}}, 
+      <br> 
+      email: {{house.user.email}},
       <br>
-      <div>Square meters: {{house.square}}</div>
-      <br>
-      <div>Rooms count: {{house.rooms}}</div>
-      <br>
-      <div>
-        Owner: {{house.user.name}}, 
-        <br> 
-        email: {{house.user.email}},
-        <br>
-        city: {{house.user.city}}
-      </div>
+      city: {{house.user.city}}
+    </div>
   </div>
   <button 
     [disabled]="house.user.is_blocked"
@@ -136,7 +136,3 @@
     [textContent]="showFullIndex === house.id && showMore ? 'Show less' : 'Show more'"> 
   </button>
 </div>
-
-
-<!-- <h2 [style.color]="error ? 'red' : 'green'">HELLO</h2>
-<button (click)="createErr()">Error</button> -->

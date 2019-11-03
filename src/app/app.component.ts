@@ -155,5 +155,5 @@ export class AppComponent {
     this.houses.push(this.createdHouse);
     alert("Your house was created!");
   }
-  
+
 }

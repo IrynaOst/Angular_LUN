@@ -7,5 +7,5 @@ export interface IHouseModel {
     street: string;
     square: number;
     rooms: number;
-    user: IUserModel
+    user: IUserModel;
 }
