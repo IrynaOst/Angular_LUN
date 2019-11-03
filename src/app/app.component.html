@@ -13,44 +13,130 @@
 
 <button (click)="register()" class="btn">Sign up</button>
 <button (click)="login()" class="btn">Login</button>
+<button (click)="addHouse()" class="btn">Add house</button>
 <br>
 <br>
 
-<div *ngIf="statusReg" >
-  <form>
-    <h4>Registration</h4>
-      <input type="text" name="name" placeholder="name">
-      <br>
-      <input type="text" name ="password" placeholder="password">
-      <br>
-      <input type="email" name="email" placeholder="email">
-      <br>
-      <input type="text" name="city" placeholder="city">
-      <br>
-      <input type="submit">
-  </form>
-</div>
+<form *ngIf="statusReg" (ngSubmit)="singInForm()" #registrationForm="ngForm">
+  <h4>Registration</h4>
+    <input 
+      [ngClass]="!nameInput.valid && nameInput.touched ? 'blockedColor' : 'unBlockedColor'"
+      type="text" name="name" placeholder="name" 
+      [(ngModel)]="registeredUser.name"
+      #nameInput="ngModel"
+      required>
+    <br>
+    <input 
+      [ngClass]="!passInput.valid && passInput.touched ? 'blockedColor' : 'unBlockedColor'"
+      type="text" name ="password" placeholder="password" 
+      [(ngModel)]="registeredUser.password"
+      #passInput="ngModel"
+      required
+      minlength="5">
+    <br>
+    <input 
+      [ngClass]="!emailInput.valid && emailInput.touched ? 'blockedColor' : 'unBlockedColor'"
+      type="email" name="email" placeholder="email" 
+      [(ngModel)]="registeredUser.email"
+      #emailInput="ngModel"
+      email
+      required>
+    <br>
+    <input 
+      type="text" name="city" placeholder="city" 
+      [(ngModel)]="registeredUser.city">
+    <br>
+    <input [disabled]="!registrationForm.valid" type="submit">
+</form>
+
 <br>
 
-<div *ngIf="statusLog">
-  <form>
-    <h4>Authorization</h4>
-      <input type="text" name="email" placeholder="email">
-      <br>
-      <input type="text" name ="password" placeholder="password">
-      <br>
-      <input type="submit">
-  </form>
-</div>
-<br>
+<form *ngIf="statusLog" (ngSubmit)="LogInForm()" #authForm="ngForm">
+  <h4>Authorization</h4>
+    <input 
+      [ngClass]="!emailInput.valid && emailInput.touched ? 'blockedColor' : 'unBlockedColor'"
+      type="text" name="email" placeholder="email"
+      [(ngModel)]="authUser.email"
+      #emailInput="ngModel"
+      email
+      required>
+    <br>
+    <input 
+      [ngClass]="!passInput.valid && passInput.touched ? 'blockedColor' : 'unBlockedColor'"
+      type="text" name ="password" placeholder="password"
+      [(ngModel)]="authUser.password"
+      #passInput="ngModel"
+      required
+      minlength="5">
+    <br>
+    <input [disabled]="!authForm.valid" type="submit">
+</form>
 <br>
 
-<div *ngFor="let house of houses" class="house btn">
+<form *ngIf="createHouse" (ngSubmit)="createHouseForm()" #addHouseForm="ngForm">
+  <h4>Select your flat</h4>
+    <br>
+    <input 
+      [ngClass]="!cityInput.valid && cityInput.touched ? 'blockedColor' : 'unBlockedColor'"
+      type="text" name="city" placeholder="city"
+      [(ngModel)]="createdHouse.city"
+      #cityInput="ngModel"
+      required>
+    <br>      
+    <input 
+      [ngClass]="!priceInput.valid && priceInput.touched ? 'blockedColor' : 'unBlockedColor'"
+      type="text" name ="price" placeholder="price"
+      [(ngModel)]="createdHouse.price"
+      #priceInput="ngModel"
+      required>
+    <br>
+    <input 
+      type="text" name ="street" placeholder="street"
+      [(ngModel)]="createdHouse.street">
+    <br>
+    <input 
+      type="text" name="square" placeholder="square meters"
+      [(ngModel)]="createdHouse.square">
+    <br>
+    <input 
+      type="text" name="rooms" placeholder="rooms"
+      [(ngModel)]="createdHouse.rooms">
+    <br>
+    <input [disabled]="!addHouseForm.valid" type="submit">
+</form>
+
+<div 
+  *ngFor="let house of houses" 
+  class="house btn"
+  [ngClass]="house.user.is_blocked ? 'blockedColor' : 'unBlockedColor'"
+>
   <div>City: {{house.city}}</div>
   <br>
-  <div>Street: {{house.street}}</div>
-  <br>
-  <div>Square meters: {{house.square}}</div>
-  <br>
   <div>Price: {{house.price}}</div>
+  <br>
+  <div *ngIf="showFullIndex === house.id && showMore">
+      <div>Street: {{house.street}}</div>
+      <br>
+      <div>Square meters: {{house.square}}</div>
+      <br>
+      <div>Rooms count: {{house.rooms}}</div>
+      <br>
+      <div>
+        Owner: {{house.user.name}}, 
+        <br> 
+        email: {{house.user.email}},
+        <br>
+        city: {{house.user.city}}
+      </div>
+  </div>
+  <button 
+    [disabled]="house.user.is_blocked"
+    (click)="showFullInfo(house.id)" 
+    class="btn"
+    [textContent]="showFullIndex === house.id && showMore ? 'Show less' : 'Show more'"> 
+  </button>
 </div>
+
+
+<!-- <h2 [style.color]="error ? 'red' : 'green'">HELLO</h2>
+<button (click)="createErr()">Error</button> -->

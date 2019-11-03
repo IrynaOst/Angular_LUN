@@ -16,7 +16,7 @@ img {
 }
 
 .house{
-    border: solid 1px rgb(167, 32, 32);
+    border: solid 1px rgb(57, 28, 126);
     width: 300px;
     padding: 5px;
     text-align: center;
@@ -24,4 +24,12 @@ img {
 
 h4 {
     margin: .5rem;
+}
+
+.blockedColor {
+    border: 1.5px solid indianred;
+}
+
+.unBlockedColor {
+    border: 1.5px solid rgb(67, 107, 26);
 }
