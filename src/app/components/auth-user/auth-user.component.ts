@@ -9,7 +9,7 @@ export class AuthUserComponent {
 
   constructor() { }
 
-  @Input() newUser
+  @Input() users
 
   authUser = {
     email: '',
@@ -17,7 +17,7 @@ export class AuthUserComponent {
   }
 
   LogInForm() {
-    const findUser = this.newUser.find(user => {
+    const findUser = this.users.find(user => {
       return this.authUser.email === user.email && this.authUser.password === user.password
     })
     findUser ? alert('Welcome') : alert('Such user is not found');

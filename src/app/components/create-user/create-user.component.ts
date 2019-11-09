@@ -9,7 +9,7 @@ export class CreateUserComponent {
 
   constructor() { }
 
-  @Input() newUser;
+  @Input() users;
 
   registeredUser = {
     name: '',
@@ -20,7 +20,7 @@ export class CreateUserComponent {
   }
 
   singInForm() {
-    this.newUser.push (
+    this.users.push (
       this.registeredUser.name, 
       this.registeredUser.password,
       this.registeredUser.email,

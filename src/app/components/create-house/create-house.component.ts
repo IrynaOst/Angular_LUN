@@ -9,8 +9,8 @@ export class CreateHouseComponent {
 
   constructor() { }
 
-  @Input() newHouse;
-  @Input() newUser;
+  @Input() houses;
+  @Input() users;
 
   createdHouse = {
     id: undefined,
@@ -23,16 +23,15 @@ export class CreateHouseComponent {
   }
 
   createHouseForm() {
-    this.newHouse.push(
-      this.createdHouse.id = this.newHouse.length+1,
+    this.houses.push(
+      this.createdHouse.id = this.houses.length+1,
       this.createdHouse.city,
       this.createdHouse.price,
       this.createdHouse.street,
       this.createdHouse.square,
       this.createdHouse.rooms,
-      this.createdHouse.user = this.newUser[Math.floor(Math.random()*this.newUser.length)]
+      this.createdHouse.user = this.users[Math.floor(Math.random()*this.users.length)]
     );
     alert("Your house was created!");
-    console.log(this.newHouse)
   }
 }
