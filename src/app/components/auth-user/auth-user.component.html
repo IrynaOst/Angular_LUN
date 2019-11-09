@@ -1,0 +1,22 @@
+
+<form (ngSubmit)="LogInForm()" #authForm="ngForm">
+  <h4>Authorization</h4>
+    <input 
+      [ngClass]="!emailInput.valid && emailInput.touched ? 'blockedColor' : 'unBlockedColor'"
+      type="text" name="email" placeholder="email"
+      [(ngModel)]="authUser.email"
+      #emailInput="ngModel"
+      email
+      required>
+    <br>
+    <input 
+      [ngClass]="!passInput.valid && passInput.touched ? 'blockedColor' : 'unBlockedColor'"
+      type="text" name ="password" placeholder="password"
+      [(ngModel)]="authUser.password"
+      #passInput="ngModel"
+      required
+      minlength="5">
+    <br>
+    <input [disabled]="!authForm.valid" type="submit">
+</form>
+<br>

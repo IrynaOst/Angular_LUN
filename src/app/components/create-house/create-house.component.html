@@ -1,0 +1,32 @@
+
+<form (ngSubmit)="createHouseForm()" #addHouseForm="ngForm">
+  <h4>Select your flat</h4>
+    <br>
+    <input 
+      [ngClass]="!cityInput.valid && cityInput.touched ? 'blockedColor' : 'unBlockedColor'"
+      type="text" name="city" placeholder="city"
+      [(ngModel)]="createdHouse.city"
+      #cityInput="ngModel"
+      required>
+    <br>      
+    <input 
+      [ngClass]="!priceInput.valid && priceInput.touched ? 'blockedColor' : 'unBlockedColor'"
+      type="text" name ="price" placeholder="price"
+      [(ngModel)]="createdHouse.price"
+      #priceInput="ngModel"
+      required>
+    <br>
+    <input 
+      type="text" name ="street" placeholder="street"
+      [(ngModel)]="createdHouse.street">
+    <br>
+    <input 
+      type="text" name="square" placeholder="square meters"
+      [(ngModel)]="createdHouse.square">
+    <br>
+    <input 
+      type="text" name="rooms" placeholder="rooms"
+      [(ngModel)]="createdHouse.rooms">
+    <br>
+    <input [disabled]="!addHouseForm.valid" type="submit">
+</form>

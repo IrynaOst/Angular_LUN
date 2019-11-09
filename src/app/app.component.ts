@@ -12,8 +12,7 @@ export class AppComponent {
   statusReg: boolean = false;
   statusLog: boolean = false;
   createHouse: boolean = false;
-  showFullIndex: number;
-  showMore: boolean = false;
+  courseUSD: number;
 
   users: IUserModel[] = [
     {
@@ -44,8 +43,9 @@ export class AppComponent {
       city: 'Lviv',
       is_blocked: false
     }
+    
   ]
-
+  
   houses: IHouseModel[] = [
     {
       id: 1,
@@ -85,28 +85,14 @@ export class AppComponent {
     },
   ]
 
-  registeredUser = {
-    name: '',
-    password: '',
-    email: '',
-    city: '',
-    is_blocked: Math.random() >= 0.5
-  }
-
-  authUser = {
-    email: '',
-    password: ''
-  }
-
-  createdHouse = {
-    id: this.houses.length+1,
-    city: '',
-    price: undefined,
-    street: '',
-    square: undefined,
-    rooms: undefined,
-    user: this.users[Math.floor(Math.random()*this.users.length)]
-  }
+  courseUSDtuUAH = fetch('https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11')
+    .then(value => value.json())
+    .then(jsonedValue => {
+      const USD = jsonedValue.find(currency => {
+        if(currency.ccy == 'USD') return currency.sale;
+      });
+      this.courseUSD = USD.sale;
+    });
 
   searchClick() {
     this.changeValue = this.inputedValue;
@@ -133,27 +119,4 @@ export class AppComponent {
     this.statusReg = false;
     this.statusLog = false;
   }
-
-  showFullInfo(id: number) {
-    this.showFullIndex = id;
-    this.showMore = !this.showMore;
-  }
-
-  singInForm() {
-    this.users.push(this.registeredUser);
-    alert("You are registered. Thank you for joining us");
-  }
-
-  LogInForm() {
-    const findUser = this.users.find(user => {
-      return this.authUser.email === user.email && this.authUser.password === user.password
-    })
-    findUser ? alert('Welcome') : alert('Such user is not found');
-  }
-
-  createHouseForm() {
-    this.houses.push(this.createdHouse);
-    alert("Your house was created!");
-  }
-
 }

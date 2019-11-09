@@ -1,0 +1,33 @@
+
+<form (ngSubmit)="singInForm()" #registrationForm="ngForm">
+  <h4>Registration</h4>
+    <input 
+      [ngClass]="!nameInput.valid && nameInput.touched ? 'blockedColor' : 'unBlockedColor'"
+      type="text" name="name" placeholder="name" 
+      [(ngModel)]="registeredUser.name"
+      #nameInput="ngModel"
+      required>
+    <br>
+    <input 
+      [ngClass]="!passInput.valid && passInput.touched ? 'blockedColor' : 'unBlockedColor'"
+      type="text" name ="password" placeholder="password" 
+      [(ngModel)]="registeredUser.password"
+      #passInput="ngModel"
+      required
+      minlength="5">
+    <br>
+    <input 
+      [ngClass]="!emailInput.valid && emailInput.touched ? 'blockedColor' : 'unBlockedColor'"
+      type="email" name="email" placeholder="email" 
+      [(ngModel)]="registeredUser.email"
+      #emailInput="ngModel"
+      email
+      required>
+    <br>
+    <input 
+      type="text" name="city" placeholder="city" 
+      [(ngModel)]="registeredUser.city">
+    <br>
+    <input [disabled]="!registrationForm.valid" type="submit">
+</form>
+<br>

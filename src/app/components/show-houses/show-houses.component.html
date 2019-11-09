@@ -1,0 +1,31 @@
+<div 
+  class="house btn"
+  [ngClass]="house.user.is_blocked ? 'blockedColor' : 'unBlockedColor'"
+>
+  <div>City: {{house.city}}</div>
+  <br>
+  <div>Price: {{house.price | currency}}</div>
+  <div>Price: {{house.price | convertCurency: courseUSD | currency:"₴"}}</div>
+  <br>
+  <div *ngIf="showFullIndex === house.id && showMore">
+    <div>Street: {{house.street}}</div>
+    <br>
+    <div>Square meters: {{house.square}}</div>
+    <br>
+    <div>Rooms count: {{house.rooms}}</div>
+    <br>
+    <div>
+      Owner: {{house.user.name}}, 
+      <br> 
+      email: {{house.user.email}},
+      <br>
+      city: {{house.user.city}}
+    </div>
+  </div>
+  <button 
+    [disabled]="house.user.is_blocked"
+    (click)="showFullInfo(house.id)" 
+    class="btn"
+    [textContent]="showFullIndex === house.id && showMore ? 'Show less' : 'Show more'"> 
+  </button>
+</div>
